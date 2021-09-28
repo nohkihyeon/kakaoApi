@@ -1,5 +1,6 @@
 /*==============================================================================
- * Created by kihyeon Noh github
+ * Created by kihyeon Noh
+ * Github <https://github.com/nohkihyeon/kakaoApi>
  * Copyright (C) 2021 Lokihyeon <hae8575@gmail.com>.
  *
  *==============================================================================*/
