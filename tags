@@ -1,0 +1,45 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+COMM_MAX	include/dataSet.h	38;"	d
+DEFAULT_SIZE	include/dataSet.h	37;"	d
+DataSet	include/dataSet.h	/^} DataSet ;$/;"	t	typeref:struct:DataSet_t
+DataSet_t	include/dataSet.h	/^typedef struct DataSet_t {$/;"	s
+Document	include/dataSet.h	/^} Document ;$/;"	t	typeref:struct:Document_t
+Document_t	include/dataSet.h	/^typedef struct Document_t{$/;"	s
+Meta	include/dataSet.h	/^} Meta ;$/;"	t	typeref:struct:Meta_t
+Meta_t	include/dataSet.h	/^typedef struct Meta_t {$/;"	s
+Region	include/dataSet.h	/^} Region ;$/;"	t	typeref:struct:Region_t
+Region_t	include/dataSet.h	/^typedef struct Region_t {$/;"	s
+SameName	include/dataSet.h	/^} SameName ;$/;"	t	typeref:struct:SameName_t
+SameName_t	include/dataSet.h	/^typedef struct SameName_t {$/;"	s
+address_name	include/dataSet.h	/^	char        address_name        [DEFAULT_SIZE]  ;$/;"	m	struct:Document_t
+buffer	src/search_keyword.c	/^char buffer[BUFSIZ];$/;"	v
+category_group_code	include/dataSet.h	/^	char        category_group_code [DEFAULT_SIZE]  ;$/;"	m	struct:Document_t
+category_group_name	include/dataSet.h	/^	char        category_group_name [DEFAULT_SIZE]  ;$/;"	m	struct:Document_t
+category_name	include/dataSet.h	/^	char        category_name       [DEFAULT_SIZE]  ;$/;"	m	struct:Document_t
+dataSet	src/search_keyword.c	/^DataSet dataSet;$/;"	v
+distance	include/dataSet.h	/^	char        distance            [DEFAULT_SIZE]  ;$/;"	m	struct:Document_t
+documents	include/dataSet.h	/^	Document    documents           [COMM_MAX]      ;$/;"	m	struct:DataSet_t
+error_handling	src/search_keyword.c	/^void error_handling(char* msg){$/;"	f
+id	include/dataSet.h	/^	char        id                  [DEFAULT_SIZE]  ;$/;"	m	struct:Document_t
+is_end	include/dataSet.h	/^	short       is_end                              ;$/;"	m	struct:Meta_t
+keyword	include/dataSet.h	/^	char        keyword             [DEFAULT_SIZE]  ;$/;"	m	struct:SameName_t
+main	src/search_keyword.c	/^int main(int argc, char *argv[]){$/;"	f
+message_fmt	src/search_keyword.c	/^char message_fmt[] = "GET %s HTTP\/1.0\\r\\nHost: %s\\r\\nAuthorization: KakaoAK %s\\r\\n\\r\\n";$/;"	v
+meta	include/dataSet.h	/^	Meta        meta                                ;$/;"	m	struct:DataSet_t
+pageable_count	include/dataSet.h	/^	int         pageable_count                      ;$/;"	m	struct:Meta_t
+phone	include/dataSet.h	/^	char        phone               [DEFAULT_SIZE]  ;$/;"	m	struct:Document_t
+place_name	include/dataSet.h	/^	char        place_name          [DEFAULT_SIZE]  ;$/;"	m	struct:Document_t
+place_url	include/dataSet.h	/^	char        place_url           [DEFAULT_SIZE]  ;$/;"	m	struct:Document_t
+region	include/dataSet.h	/^	char        region              [DEFAULT_SIZE]  ;$/;"	m	struct:Region_t
+regions	include/dataSet.h	/^	Region      regions             [COMM_MAX]      ;$/;"	m	struct:SameName_t
+road_address_name	include/dataSet.h	/^	char        road_address_name   [DEFAULT_SIZE]  ;$/;"	m	struct:Document_t
+same_name	include/dataSet.h	/^	SameName    same_name                           ;$/;"	m	struct:Meta_t
+selected_region	include/dataSet.h	/^	char        selected_region     [DEFAULT_SIZE]  ;$/;"	m	struct:SameName_t
+total_count	include/dataSet.h	/^	int         total_count                         ;$/;"	m	struct:Meta_t
+x	include/dataSet.h	/^	char        x                   [DEFAULT_SIZE]  ;$/;"	m	struct:Document_t
+y	include/dataSet.h	/^	char        y                   [DEFAULT_SIZE]  ;$/;"	m	struct:Document_t

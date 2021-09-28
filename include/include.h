@@ -8,3 +8,10 @@
 #include <stdlib.h>
 #include <jansson.h>
 #include <stdbool.h>
+
+
+/*========================================================================
+ * Function Prototype
+ *========================================================================*/
+char* getAddress(char*);
+int socketConnect(char*);

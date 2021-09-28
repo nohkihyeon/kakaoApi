@@ -14,15 +14,12 @@ DataSet dataSet;
 
 void error_handling(char* msg);
 char buffer[BUFSIZ];
+char message_fmt[] = "GET %s HTTP/1.0\r\nHost: %s\r\nAuthorization: KakaoAK %s\r\n\r\n";
 
 int main(int argc, char *argv[]){
-	int status;
-	struct addrinfo hints;
-	struct addrinfo *servinfo, *tmp;                // 결과를 저장할 변수
 	char host[256];
 	int c_socket;
 	struct sockaddr_in c_addr;
-	char message_fmt[] = "GET %s HTTP/1.0\r\nHost: %s\r\nAuthorization: KakaoAK %s\r\n\r\n";
 
 	int left_len, sent_len, recv_len, bytes;
 	char rcvBuffer[BUFSIZ];
@@ -32,33 +29,15 @@ int main(int argc, char *argv[]){
 	json_error_t error;
 	int i;
 
-
-	c_socket = socket(PF_INET, SOCK_STREAM, 0);
-
-	memset(&hints, 0, sizeof(hints));               // hints 구조체의 모든 값을 0으로 초기화
-	hints.ai_family = AF_UNSPEC;                    // IPv4 IPv6 상관없이 결과 모두 반환
-	hints.ai_socktype = SOCK_STREAM;                // TCP stream sockets
 	if(argc !=4){
 		fprintf(stderr, "Usage : <host> <resource> <API_KEYS>\nex) ./search_keyword dapi.kakao.com  /v2/local/search/keyword.json?query=<query> <API_KEYS>\n");
 		return -1;
 	}
-
-	status = getaddrinfo(argv[1], "80", &hints, &servinfo);
-
-	tmp = servinfo;
-	getnameinfo(tmp->ai_addr, tmp->ai_addrlen, host, sizeof(host), NULL, 0, NI_NUMERICHOST);
-
+	strcpy(host , getAddress(argv[1]));
+	
 	sprintf(buffer, message_fmt, argv[2], argv[1], argv[3]);
 
-	memset(&c_addr, 0, sizeof(c_addr));
-	c_addr.sin_addr.s_addr = inet_addr(host);
-	c_addr.sin_family = AF_INET;
-	c_addr.sin_port = htons(80);
-
-
-	if(connect(c_socket, (struct sockaddr *) &c_addr, sizeof(c_addr)) == -1){
-		error_handling("Can not connect");
-		close(c_socket);
+	if(socketConnect(host) == -1){
 		return -1;
 	}
 
@@ -159,7 +138,6 @@ int main(int argc, char *argv[]){
 
 
 	close(c_socket);
-	freeaddrinfo(servinfo);
 
 }
 
