@@ -13,5 +13,10 @@
 /*========================================================================
  * Function Prototype
  *========================================================================*/
-char* getAddress(char*);
-int socketConnect(char*);
+int getAddr(char *argv[]);
+char* writeBuffer();
+int getAddress(char*);
+int dataParsing(char*);
+void error_handling(char*);
+
+char buffer[BUFSIZ];

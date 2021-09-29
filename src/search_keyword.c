@@ -1,8 +1,7 @@
 /*==============================================================================
- * Created by kihyeon Noh
- * Github <https://github.com/nohkihyeon/kakaoApi>
- * Copyright (C) 2021 Lokihyeon <hae8575@gmail.com>.
- *
+  Created by kihyeon Noh
+  Github <https://github.com/nohkihyeon/kakaoApi>
+  Copyright (C) 2021 Lokihyeon <hae8575@gmail.com>.
  *==============================================================================*/
 
 #include <include.h>
@@ -11,36 +10,54 @@
 
 /* Type define for primitive types */
 DataSet dataSet;
-
-void error_handling(char* msg);
-char buffer[BUFSIZ];
 char message_fmt[] = "GET %s HTTP/1.0\r\nHost: %s\r\nAuthorization: KakaoAK %s\r\n\r\n";
+int c_socket;
+char* afterData;
 
-int main(int argc, char *argv[]){
+json_t *root;
+json_error_t error;
+int i;
+
+int getAddr(char *argv[]){
+
+	int status;
+	struct addrinfo hints;
+	struct addrinfo *servinfo, *tmp;                // 결과를 저장할 변수
 	char host[256];
-	int c_socket;
 	struct sockaddr_in c_addr;
 
-	int left_len, sent_len, recv_len, bytes;
-	char rcvBuffer[BUFSIZ];
-	char data[BUFSIZ];
-	char* afterData;
-	json_t *root;
-	json_error_t error;
-	int i;
+	memset(&hints, 0, sizeof(hints));               // hints 구조체의 모든 값을 0으로 초기화
+	hints.ai_family = AF_UNSPEC;                    // IPv4 IPv6 상관없이 결과 모두 반환
+	hints.ai_socktype = SOCK_STREAM;                // TCP stream sockets
+	status = getaddrinfo(argv[1], "80", &hints, &servinfo);
 
-	if(argc !=4){
-		fprintf(stderr, "Usage : <host> <resource> <API_KEYS>\nex) ./search_keyword dapi.kakao.com  /v2/local/search/keyword.json?query=<query> <API_KEYS>\n");
-		return -1;
-	}
-	strcpy(host , getAddress(argv[1]));
-	
+	c_socket = socket(PF_INET, SOCK_STREAM, 0);
+	tmp = servinfo;
+	getnameinfo(tmp->ai_addr, tmp->ai_addrlen, host, sizeof(host), NULL, 0, NI_NUMERICHOST);
+
 	sprintf(buffer, message_fmt, argv[2], argv[1], argv[3]);
 
-	if(socketConnect(host) == -1){
+	memset(&c_addr, 0, sizeof(c_addr));
+	c_addr.sin_addr.s_addr = inet_addr(host);
+	c_addr.sin_family = AF_INET;
+	c_addr.sin_port = htons(80);
+
+
+	if(connect(c_socket, (struct sockaddr *) &c_addr, sizeof(c_addr)) == -1){
+		error_handling("Can not connect");
+		close(c_socket);
+		freeaddrinfo(servinfo);
 		return -1;
 	}
+	freeaddrinfo(servinfo);
+	return 0;
+}
 
+char* writeBuffer(){
+
+	static char writenData[BUFSIZ];
+	int left_len, sent_len, recv_len, bytes;
+	char rcvBuffer[BUFSIZ];
 	left_len = strlen(buffer);
 	sent_len = 0;
 	do{
@@ -57,19 +74,23 @@ int main(int argc, char *argv[]){
 	do{
 		memset(rcvBuffer, 0, sizeof(rcvBuffer));
 		bytes = read(c_socket, rcvBuffer, 1024);
-		//fprintf(stdout, "%s ", rcvBuffer);
+		fprintf(stdout, "%s ", rcvBuffer);
 
 		if(bytes < 0)
 			error_handling("read() error\n");
 		if(bytes ==0)
 			break;
 		recv_len +=bytes;
-//		sprintf(data, "%s%s", data, rcvBuffer);
-		strcat(data, rcvBuffer);
+		strcat(writenData, rcvBuffer);
 	}while(1);
 
 	if(recv_len == left_len)
 		error_handling("Error\n");
+	return writenData;
+
+}
+
+int dataParsing(char* data){
 
 	afterData = strstr(data, "{");
 	root = json_loads(afterData, 0, &error);
@@ -130,15 +151,30 @@ int main(int argc, char *argv[]){
 
 		json_t *jsonSelected_region = json_object_get(jsonSame_name, "selected_region");
 		strcpy(dataSet.meta.same_name.selected_region , json_string_value(jsonSelected_region));
+
 		printf("\nsame_name\nkeyword = %s\n\nselected_region = %s\n", dataSet.meta.same_name.keyword, dataSet.meta.same_name.selected_region);
+	}
+}
+
+int main(int argc, char *argv[]){
+	char* data;
 
 
-
+	if(argc !=4){
+		fprintf(stderr, "Usage : <host> <resource> <API_KEYS>\nex) ./search_keyword dapi.kakao.com  /v2/local/search/keyword.json?query=<query> <API_KEYS>\n");
+		return -1;
 	}
 
+	/* 1. Get Address */
+	if(getAddr(argv) < 0) return -1;
+
+	/* 2. Get Address */
+	data = writeBuffer();
+
+	/* 3. Parsing json data*/
+	dataParsing(data);
 
 	close(c_socket);
-
 }
 
 void error_handling(char* msg){
@@ -146,5 +182,4 @@ void error_handling(char* msg){
 	fputc('\n', stderr);
 	exit(1);
 }
-
 
