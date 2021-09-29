@@ -168,7 +168,7 @@ int main(int argc, char *argv[]){
 	/* 1. Get Address */
 	if(getAddr(argv) < 0) return -1;
 
-	/* 2. Get Address */
+	/* 2. Get json data*/
 	data = writeBuffer();
 
 	/* 3. Parsing json data*/
