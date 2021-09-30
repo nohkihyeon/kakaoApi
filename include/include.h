@@ -7,8 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <jansson.h>
-#include <stdbool.h>
-
+#include <dataSet.h>
 
 /*========================================================================
  * Function Prototype
@@ -20,3 +19,5 @@ int dataParsing(char*);
 void error_handling(char*);
 
 char buffer[BUFSIZ];
+DataSet dataSet;
+int c_socket;

@@ -1,5 +1,5 @@
 /*==============================================================================
- * Created by kihyeonNoh
+ * Created by kihyeon, Noh
  * for kakao api 키워드 검색
  *=============================================================================*/
 
@@ -34,8 +34,13 @@
 	}
 }
 */
+
 #define DEFAULT_SIZE 512
 #define COMM_MAX     5
+
+#ifndef __DATASET_H__
+#define __DATASET_H__
+
 typedef struct Document_t{
 	char        id                  [DEFAULT_SIZE]  ;
 	char        place_name          [DEFAULT_SIZE]  ;
@@ -72,4 +77,4 @@ typedef struct DataSet_t {
 	Document    documents           [COMM_MAX]      ;
 	Meta        meta                                ;
 } DataSet ;
-
+#endif
