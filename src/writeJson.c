@@ -36,7 +36,7 @@ char* writeBuffer(){
 	do{
 		memset(rcvBuffer, 0, sizeof(rcvBuffer));
 		bytes = read(c_socket, rcvBuffer, 1024);
-		fprintf(stdout, "%s ", rcvBuffer);
+//		fprintf(stdout, "%s ", rcvBuffer);
 
 		if(bytes < 0)
 			error_handling("read() error\n");

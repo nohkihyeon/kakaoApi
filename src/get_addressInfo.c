@@ -28,6 +28,8 @@ int getAddr(char *argv[]){
 	hints.ai_family = AF_UNSPEC;                    // IPv4 IPv6 상관없이 결과 모두 반환
 	hints.ai_socktype = SOCK_STREAM;                // TCP stream sockets
 	status = getaddrinfo(argv[1], "80", &hints, &servinfo);
+	if(status !=0)
+		error_handling("not support getaddrinfo");
 
 	c_socket = socket(PF_INET, SOCK_STREAM, 0);
 	tmp = servinfo;

@@ -35,6 +35,7 @@ int main(int argc, char *argv[]){
 	dataParsing(data);
 
 	close(c_socket);
+	return 0;
 }
 
 void error_handling(char* msg){
@@ -42,4 +43,3 @@ void error_handling(char* msg){
 	fputc('\n', stderr);
 	exit(1);
 }
-

@@ -14,5 +14,6 @@ TARGET	Makefile	/^TARGET = keywordSearch_exe $/;"	m
 dataParsing	data_parsing.c	/^int dataParsing(char* data){$/;"	f
 error_handling	search_keyword.c	/^void error_handling(char* msg){$/;"	f
 getAddr	get_addressInfo.c	/^int getAddr(char *argv[]){$/;"	f
+load_json	data_parsing.c	/^json_t *load_json(const char *text) {$/;"	f
 main	search_keyword.c	/^int main(int argc, char *argv[]){$/;"	f
 writeBuffer	writeJson.c	/^char* writeBuffer(){$/;"	f
