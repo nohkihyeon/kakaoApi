@@ -13,6 +13,7 @@ DataSet	include/dataSet.h	/^} DataSet ;$/;"	t	typeref:struct:DataSet_t
 DataSet_t	include/dataSet.h	/^typedef struct DataSet_t {$/;"	s
 Document	include/dataSet.h	/^} Document ;$/;"	t	typeref:struct:Document_t
 Document_t	include/dataSet.h	/^typedef struct Document_t{$/;"	s
+HEADER_H	include/include.h	2;"	d
 INC	src/Makefile	/^INC = -I\/home\/khnoh\/json\/kakaoApi\/include$/;"	m
 LFLAGS	src/Makefile	/^LFLAGS = -ljansson$/;"	m
 Meta	include/dataSet.h	/^} Meta ;$/;"	t	typeref:struct:Meta_t
@@ -39,6 +40,7 @@ getAddr	src/get_addressInfo.c	/^int getAddr(char *argv[]){$/;"	f
 id	include/dataSet.h	/^	char        id                  [DEFAULT_SIZE]  ;$/;"	m	struct:Document_t
 is_end	include/dataSet.h	/^	short       is_end                              ;$/;"	m	struct:Meta_t
 keyword	include/dataSet.h	/^	char        keyword             [DEFAULT_SIZE]  ;$/;"	m	struct:SameName_t
+load_json	src/data_parsing.c	/^json_t *load_json(const char *text) {$/;"	f
 main	src/search_keyword.c	/^int main(int argc, char *argv[]){$/;"	f
 meta	include/dataSet.h	/^	Meta        meta                                ;$/;"	m	struct:DataSet_t
 pageable_count	include/dataSet.h	/^	int         pageable_count                      ;$/;"	m	struct:Meta_t
